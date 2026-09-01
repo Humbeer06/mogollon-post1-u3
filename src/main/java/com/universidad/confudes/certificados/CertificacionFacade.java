@@ -11,8 +11,7 @@ import org.springframework.stereotype.Service;
  * servicios, solo invoca emitir().
  */
 @Service
-public class CertificacionFacade {
-
+public class CertificacionFacade implements ServicioCertificados {
     private final ServicioReservaSala servicioReservaSala;
     private final ServicioPlantillaPDF servicioPlantillaPDF;
     private final ServicioFirmaDigital servicioFirmaDigital;
@@ -32,6 +31,7 @@ public class CertificacionFacade {
      * @return el PDF firmado, o null si no hay reserva confirmada
      *         para el evento.
      */
+    @Override
     public byte[] emitir(String eventoId, String participanteId) {
         if (!servicioReservaSala.tieneReservaConfirmada(eventoId)) {
             return null;
